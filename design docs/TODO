@@ -1,0 +1,96 @@
+* Skeleton
+    links all modules between them
+    FightSystem ONIT
+    NarratifSystem?, 
+    Map?
+    listModules forinstance : fightsystem
+    
+* NarratifSystem
+    description of where you start, what is accesible, what becomes accesible when whatn when are there cinematics, what are the dialogues, etc
+
+* FightSystem
+
+        *IAFightActor
+
+    * FightObject : skeleton for a fight, links all modules for one fight
+        a map
+        animation
+        gui, movement
+        deal the turns
+    
+    *Watcher of events    
+        *place where events arrive and are checked and directed to the watchers
+        make it to an object where everyone tells what events it listens to and are contacted back when it happens
+
+            * DelayedAction independant and dependant of a FightActor     
+
+        *  what charac are there ?    
+
+    * history    .thisTurn #flushed each turn .thisFight
+        autoconfigure =f(pipes) Or enable all except greedy if ok for memory
+    * pipes
+
+    two type of pipes, 
+                CheckPipes condition checking and stateUpdating, intent submitting
+                ModifPipes, modif attack result if cond met
+        reader
+        list essential pipes and test them
+        pipe editor? with essential pipes as building blocks        
+        essential:
+            counterAttack one time per turn / immediatly or after all blow
+            counterAttack one per ennemy attacking me / immediatly or after all blow
+            readLast, if attack kills me, trigger esquive , AR = 0
+
+    *intentsheet
+        sorting the intent
+        testing submitting then sorted the intent gives the reslult hopes
+
+            intent .still_apply()
+
+    * porting result of IntentSheetReader To world
+        animation, ligne to console mini écran, animation attaque et animation defense
+        * Teams
+
+        *gui
+            select case in a list of possible case or cancel ;then give back ctrl        
+            select action between list of action or cancel; then give back ctrl
+Objects:
+
+    FightObject: skeleton for a Fight
+        -> DelayedAction #each turn, numberOfTurnLeft-- if ==0, .activate
+        
+        DelayedAction .numberOfTurnLeft .activate() .dependantOfLauncher : bool
+
+    FightActor
+        -> Team
+        -> history .thisTurn .thisFight
+        -> characs .initiative .force .dexterité .volonté .intelligence
+        sig endOfTurn LevelUp
+
+    ONIT
+    pipeReader
+        sorting the pipe
+        .pipeQueue    
+            pipe
+                .evaluate(AR) -> return AR'
+                    possibly altering history (by signal?)
+
+    Team
+        .isAI .uniqID    
+
+
+DataModel:
+(AssaultData + DefenceData) in AttackResultCalculator ==> AttackResult noté AR
+AR in pipeline (made of pipes) ==> final AR
+_______________________________
+* ExperienceSystem
+    * what happens when you level up
+_______________________________
+Map
+this map is the data of the connection between scene
+creating a map editor with graphnodes to link multiple scene on a map with connectors linked to "Gates" in the scenes
+the link can optionnaly be tagged (for instance secret/ or condition to accomplish/ or choice/)
+
+
+
+

@@ -1,0 +1,37 @@
+WHAT IM DOING RIGHT NOw
+
+pipe deal type attack!
+
+pipe stateupdating cant change history before they know their AR is applied
+essential pipes
+
+
+
+history
+doing a resource and a reader for that resource that updates the history
+history_pipe
+
+
+check pipe : pipeCanStrikeBack?
+
+!!!
+intentGenerator by fightActor
+.generate(fightActor, intent_name, intent_data)-
+
+
+!!!
+should be able to generate most basics intent 
+        -move actor from A to B
+        -actor A attack actor B
+        
+        
+unitTest + integrateTest the all fck
+
+consoleTest done!
+
+inputhandler
+-choice in list
+-choice in enum? -bool choice?
+-choice in map??? (or mapGui deals that or something OR inputHandler connects the mapGUI and the rest
+
+gdscrpit variadic function???

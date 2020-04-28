@@ -1,0 +1,238 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "Reference",
+"class": "ActionWatcher",
+"language": "GDScript",
+"path": "res://src/Skeletons/FightSystem/EventCenter/ActionWatcher.gd"
+}, {
+"base": "Reference",
+"class": "ActorChoiceGenerator",
+"language": "GDScript",
+"path": "res://src/Skeletons/FightSystem/FightActor/possible_choice_generator.gd"
+}, {
+"base": "Node",
+"class": "AnimatorDevice",
+"language": "GDScript",
+"path": "res://src/Skeletons/FightSystem/AnimationCenter/FightMapDisplay/AnimatorDevice/AnimatorDevice.gd"
+}, {
+"base": "Node",
+"class": "Assault",
+"language": "GDScript",
+"path": "res://src/Skeletons/FightSystem/Assault/Assault.gd"
+}, {
+"base": "Reference",
+"class": "AssaultDealer",
+"language": "GDScript",
+"path": "res://src/Skeletons/FightSystem/Assault/AssaultDealer.gd"
+}, {
+"base": "Reference",
+"class": "Astar2Dutils",
+"language": "GDScript",
+"path": "res://src/Skeletons/FightSystem/MapInternData/a_star_utils.gd"
+}, {
+"base": "Reference",
+"class": "Condition",
+"language": "GDScript",
+"path": "res://src/Skeletons/FightSystem/FightObject/Condition/condition.gd"
+}, {
+"base": "RichTextLabel",
+"class": "Console",
+"language": "GDScript",
+"path": "res://src/Skeletons/FightSystem/AnimationCenter/FightMapDisplay/AnimatorDevice/Console/Console.gd"
+}, {
+"base": "AnimatorDevice",
+"class": "ConsoleAnimator",
+"language": "GDScript",
+"path": "res://src/Skeletons/FightSystem/AnimationCenter/FightMapDisplay/AnimatorDevice/Console/ConsoleAnimator.gd"
+}, {
+"base": "",
+"class": "DijkstraMap",
+"language": "NativeScript",
+"path": "res://dijkstra_map.gdns"
+}, {
+"base": "AnimatorDevice",
+"class": "DualScreenAnimator",
+"language": "GDScript",
+"path": "res://src/Skeletons/FightSystem/AnimationCenter/FightMapDisplay/AnimatorDevice/DualScreen/DualScreenAnimator.gd"
+}, {
+"base": "Reference",
+"class": "EventCenter",
+"language": "GDScript",
+"path": "res://src/Skeletons/FightSystem/EventCenter/event_center.gd"
+}, {
+"base": "Reference",
+"class": "Example_Assault",
+"language": "GDScript",
+"path": "res://src/Skeletons/FightSystem/Assault/Assaults/ExampleAssault.gd"
+}, {
+"base": "Resource",
+"class": "FightAction",
+"language": "GDScript",
+"path": "res://src/Skeletons/FightSystem/Actions/Actions.gd"
+}, {
+"base": "Node",
+"class": "FightActor",
+"language": "GDScript",
+"path": "res://src/Skeletons/FightSystem/FightActor/FightActor.gd"
+}, {
+"base": "Resource",
+"class": "FightActorHistory",
+"language": "GDScript",
+"path": "res://src/Skeletons/FightSystem/FightActor/History/history.gd"
+}, {
+"base": "Node",
+"class": "FightAnimationCenter",
+"language": "GDScript",
+"path": "res://src/Skeletons/FightSystem/AnimationCenter/AnimationCenter.gd"
+}, {
+"base": "Reference",
+"class": "FightInputHandler",
+"language": "GDScript",
+"path": "res://src/Skeletons/FightSystem/InputHandler/fight_input_handler.gd"
+}, {
+"base": "Reference",
+"class": "FightInputRequester",
+"language": "GDScript",
+"path": "res://src/Skeletons/FightSystem/InputHandler/FightInputRequester.gd"
+}, {
+"base": "Node2D",
+"class": "FightObject",
+"language": "GDScript",
+"path": "res://src/Skeletons/FightSystem/FightObject/FightObject.gd"
+}, {
+"base": "AnimatorDevice",
+"class": "GuiMapAnimator",
+"language": "GDScript",
+"path": "res://src/Skeletons/FightSystem/AnimationCenter/FightMapDisplay/AnimatorDevice/GUIMapAnimator/GuiMapAnimator.gd"
+}, {
+"base": "Reference",
+"class": "GuiNextActorsListUtils",
+"language": "GDScript",
+"path": "res://src/Skeletons/FightSystem/FightActor/gui_next_actors_utils.gd"
+}, {
+"base": "Node",
+"class": "IDijkstraMap",
+"language": "GDScript",
+"path": "res://djikstra/IDijkstra.gd"
+}, {
+"base": "Reference",
+"class": "ITeams",
+"language": "GDScript",
+"path": "res://src/Skeletons/FightSystem/FightActor/Team/Iteam.gd"
+}, {
+"base": "Control",
+"class": "InputDevice",
+"language": "GDScript",
+"path": "res://src/Skeletons/FightSystem/InputHandler/input_device.gd"
+}, {
+"base": "Reference",
+"class": "Intent",
+"language": "GDScript",
+"path": "res://src/Skeletons/FightSystem/IntentSheet/Intent/Intent.gd"
+}, {
+"base": "Reference",
+"class": "IntentGenerator",
+"language": "GDScript",
+"path": "res://src/Skeletons/FightSystem/IntentSheet/Intent/intentGenerator.gd"
+}, {
+"base": "Reference",
+"class": "IntentSheet",
+"language": "GDScript",
+"path": "res://src/Skeletons/FightSystem/IntentSheet/IntentSheet.gd"
+}, {
+"base": "Reference",
+"class": "ObjectiveMap",
+"language": "GDScript",
+"path": "res://src/Skeletons/FightSystem/MapInternData/objective_map.gd"
+}, {
+"base": "Reference",
+"class": "Pipe",
+"language": "GDScript",
+"path": "res://src/Skeletons/FightSystem/IntentSheet/Pipeline/pipe.gd"
+}, {
+"base": "Reference",
+"class": "Pipeline",
+"language": "GDScript",
+"path": "res://src/Skeletons/FightSystem/IntentSheet/Pipeline/pipeline.gd"
+}, {
+"base": "Reference",
+"class": "WatcherCondition",
+"language": "GDScript",
+"path": "res://src/Skeletons/FightSystem/EventCenter/condition.gd"
+}, {
+"base": "Reference",
+"class": "WatcherListener",
+"language": "GDScript",
+"path": "res://src/Skeletons/FightSystem/EventCenter/event_listener.gd"
+}, {
+"base": "Reference",
+"class": "WatcherSubscriber",
+"language": "GDScript",
+"path": "res://src/Skeletons/FightSystem/EventCenter/subscriber.gd"
+} ]
+_global_script_class_icons={
+"ActionWatcher": "",
+"ActorChoiceGenerator": "",
+"AnimatorDevice": "",
+"Assault": "",
+"AssaultDealer": "",
+"Astar2Dutils": "",
+"Condition": "",
+"Console": "",
+"ConsoleAnimator": "",
+"DijkstraMap": "",
+"DualScreenAnimator": "",
+"EventCenter": "",
+"Example_Assault": "",
+"FightAction": "",
+"FightActor": "",
+"FightActorHistory": "",
+"FightAnimationCenter": "",
+"FightInputHandler": "",
+"FightInputRequester": "",
+"FightObject": "",
+"GuiMapAnimator": "",
+"GuiNextActorsListUtils": "",
+"IDijkstraMap": "",
+"ITeams": "",
+"InputDevice": "",
+"Intent": "",
+"IntentGenerator": "",
+"IntentSheet": "",
+"ObjectiveMap": "",
+"Pipe": "",
+"Pipeline": "",
+"WatcherCondition": "",
+"WatcherListener": "",
+"WatcherSubscriber": ""
+}
+
+[application]
+
+config/name="tacticalRPG_v_01"
+config/icon="res://icon.png"
+
+[autoload]
+
+Constants="*res://Autoload/Constants.gd"
+
+[editor_plugins]
+
+enabled=PoolStringArray( "gut" )
+
+[gdnative]
+
+singletons=[  ]
+
+[rendering]
+
+environment/default_environment="res://default_env.tres"
