@@ -19,7 +19,7 @@ it has a layers
 		contains ref th=o the actors, updated when they move/die
 
 """
-const EMPTY = 0
+const EMPTY = -1
 var map := DijkstraMap.new()
 
 #pos -> Actor, Obstacle, Ground
@@ -28,15 +28,37 @@ var ObstacleLayer
 var GroundLayer
 
 
+func _OnBodyDisapepear():
+	pass
+
+func _OnObstacleDisapepear():
+	pass
+
+func _OnBodyDissappear():
+	pass
+
+func _OnBodyMoved():
+	pass
+
+func _OnObstacleMoved():
+	pass
+
 
 func enable_positions(list : Array):
-	pass
+	pass	
 	
 func disable_positions(list : Array):
 	pass
 
+func reachable_positions_from(pos,unavailable)-> Array:
+	var reachables : Array
+	#disable unreachable positions for player such as ennemy, obstacles
+	#get undercost
+	#remove busycase from available
+	return reachables
+
 func case_is_busy(pos):
-	if BodiesLayer[pos] != EMPTY or ObstacleLayer[pos] != EMPTY:return true
+	if BodiesLayer[pos] != EMPTY or ObstacleLayer[pos] != EMPTY: return true
 	return false
 
 # does not support moving two thing on the same place

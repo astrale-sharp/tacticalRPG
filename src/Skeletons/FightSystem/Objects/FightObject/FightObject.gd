@@ -52,7 +52,7 @@ var ConsoleGui : Console
 var _Cursor : Cursor #optionnal
 
 #---------------CALCULATION------------------#
-var MapIntern : # handles calculationn can i go there, what cost?
+var _MapIntern : MapIntern# handles calculationn can i go there, what cost?
 
 #-----------CONNECTIONS--------------------#
 var InputHandler : FightInputHandler #if you require an input you have access to that, it will require it for you and give you the data
