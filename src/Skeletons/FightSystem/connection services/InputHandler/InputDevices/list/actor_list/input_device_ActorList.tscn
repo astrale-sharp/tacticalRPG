@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/Skeletons/FightSystem/connection services/InputHandler/InputDevices/list/actor_list/input_device_ActorList.gd" type="Script" id=1]
+
+
+[node name="device_list" type="Control"]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="menu" type="PopupMenu" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 257.0
+margin_bottom = 142.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="id_pressed" from="menu" to="." method="OnGuiResponse"]
