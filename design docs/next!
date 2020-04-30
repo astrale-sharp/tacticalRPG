@@ -1,0 +1,5 @@
+MyITeams.next_set_of_player()
+curr_player.play() at end of play SetActor decides if he should be removed from the Set
+curr_player.turn_done()
+
+playerSet connected to PlayEnded
