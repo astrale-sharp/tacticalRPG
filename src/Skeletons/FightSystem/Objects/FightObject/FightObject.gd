@@ -35,14 +35,14 @@ signal PlayEnded
 #------------DEPENDANCY--------------#
 #------------------------------------#
 
-#------------------------------------#
+#-------------RESOURCE-----------------#
 var _FightData : FightData  #will contain all the data given for doing the fight
 	#a map,teams, condition for end fight
 
-#------------------------------------#
+#---------------OUTPUT DEVICES---------------#
 
 #user info query
-var FightGui #general display of info and permaOption or choice that dont require the map FightObject Wires as it likes the input requested to gui devices here or in the fightmap
+var FightGui : FightUserGui #general display of info and permaOption or choice that dont require the map FightObject Wires as it likes the input requested to gui devices here or in the fightmap
 
 # connected outputs
 var MapGui : GuiMapAnimator # handles repres of blocks, player obstacle
@@ -52,14 +52,17 @@ var ConsoleGui : Console
 var _Cursor : Cursor #optionnal
 
 #---------------CALCULATION------------------#
-var MapIntern # handles calculationn can i go there, what cost?
+var MapIntern : # handles calculationn can i go there, what cost?
 
 #-----------CONNECTIONS--------------------#
 var InputHandler : FightInputHandler #if you require an input you have access to that, it will require it for you and give you the data
 var MyAnimationCenter : FightAnimationCenter #you have to animate something on screen talk to me
+var event_center : EventCenter
+#--------------DECISIONS--------------#
+var intent_sheet : IntentSheet
 
 #-------------UTILS-----------------#
-var MyITeams #interface for Teams, is given by me a func for deciding things 
+var MyITeams : ITeams #interface for Teams, is given by me a func for deciding things 
 #------------------------------------#
 #------------PRIVATE-----------------#
 var KeepFight : Condition
@@ -138,11 +141,14 @@ func initiate():
 	#load all and try to fulfill the dependancy or fails
 	#------------SELF------------#
 	dependancy_check()
-	
+	wire_actors()
 	KeepFight = _FightData.EndCondition
 	
 	InputHandler = FightInputHandler.new()
 	MyAnimationCenter = FightAnimationCenter.new(ConsoleGui,MapGui,DualScreenGui)
+	
+	intent_sheet.connect("PortThisToWorld",MyAnimationCenter,"ReceiveAction" )
+	intent_sheet.connect("PortThisToWorld",event_center,"_onActionDone" )
 	#------------Childs----------------#
 	#connect everything that needs to be connected on order to do the fight
 
@@ -154,7 +160,12 @@ func initiate():
 	
 	#FightMap is initiated
 	#ListUtils = ...new(InputHandler)
-	pass
+
+func wire_actors():
+	var actors = MyITeams.get_all_actors()
+	for actor in actors:
+		actor.wire(intent_sheet,InputHandler,MapIntern)
+
 
 func dependancy_check():
 	if not MyITeams:

@@ -2,8 +2,8 @@ extends "res://addons/gut/test.gd"
 
 var Fobj := FightObject.new()
 
-var FightData
-var FightGui
+var _FightData : FightData
+var FightGui 
 var MapGui 
 var DualScreenGui 
 var ConsoleGui

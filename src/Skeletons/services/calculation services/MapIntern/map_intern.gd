@@ -1,4 +1,5 @@
 extends Reference
+class_name MapIntern
 """
 this is the spatial repres of the world
 used to know 
@@ -17,23 +18,22 @@ it has a layers
 	map_bodies
 		contains ref th=o the actors, updated when they move/die
 
-it has a performOP datastruct:
-	its a 'map', with all connected points
-	
-prototype, each player generate all map
-PERFORMANCE
-	for best performance, share one astar object in stand by, overwrite weigth for dynamic changes, flags and maybe other?
-BEWARE
-	if too heavy on memory two optimizations
-		1 min movement cost = 10
-		calculate maximum range (including gates) the body might move
-		2 loads a sub_map (with a relative offset :'( dont forget it ) on which the operations will be performed
-
 """
 const EMPTY = 0
+var map := DijkstraMap.new()
+
+#pos -> Actor, Obstacle, Ground
 var BodiesLayer
 var ObstacleLayer
 var GroundLayer
+
+
+
+func enable_positions(list : Array):
+	pass
+	
+func disable_positions(list : Array):
+	pass
 
 func case_is_busy(pos):
 	if BodiesLayer[pos] != EMPTY or ObstacleLayer[pos] != EMPTY:return true

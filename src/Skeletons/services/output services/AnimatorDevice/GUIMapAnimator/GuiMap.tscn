@@ -1,8 +1,6 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://src/Skeletons/services/output services/FightMapDisplay/AnimatorDevice/GUIMapAnimator/GuiMapAnimator.gd" type="Script" id=1]
-
-
+[ext_resource path="res://src/Skeletons/services/output services/AnimatorDevice/GUIMapAnimator/GuiMapAnimator.gd" type="Script" id=1]
 
 [node name="GUIMAP" type="Control"]
 script = ExtResource( 1 )

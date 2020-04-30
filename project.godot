@@ -22,7 +22,7 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "AnimatorDevice",
 "language": "GDScript",
-"path": "res://src/Skeletons/services/output services/FightMapDisplay/AnimatorDevice/AnimatorDevice.gd"
+"path": "res://src/Skeletons/services/output services/AnimatorDevice/AnimatorDevice.gd"
 }, {
 "base": "Node",
 "class": "Assault",
@@ -37,27 +37,27 @@ _global_script_classes=[ {
 "base": "Reference",
 "class": "Astar2Dutils",
 "language": "GDScript",
-"path": "res://src/Skeletons/services/decision services/MapInternData/a_star_utils.gd"
+"path": "res://src/Skeletons/services/calculation services/MapIntern/a_star_utils.gd"
 }, {
 "base": "Reference",
 "class": "Condition",
 "language": "GDScript",
 "path": "res://src/Skeletons/FightSystem/Objects/resources/Condition/condition.gd"
 }, {
-"base": "RichTextLabel",
+"base": "AnimatorDevice",
 "class": "Console",
 "language": "GDScript",
-"path": "res://src/Skeletons/services/output services/FightMapDisplay/AnimatorDevice/Console/Console.gd"
+"path": "res://src/Skeletons/services/output services/AnimatorDevice/Console/Console.gd"
 }, {
 "base": "AnimatorDevice",
 "class": "ConsoleAnimator",
 "language": "GDScript",
-"path": "res://src/Skeletons/services/output services/FightMapDisplay/AnimatorDevice/Console/ConsoleAnimator.gd"
+"path": "res://src/Skeletons/services/output services/AnimatorDevice/Console/ConsoleAnimator.gd"
 }, {
 "base": "Node",
 "class": "Cursor",
 "language": "GDScript",
-"path": "res://src/Skeletons/services/output services/FightMapDisplay/AnimatorDevice/cursor/cursor.gd"
+"path": "res://src/Skeletons/services/output services/AnimatorDevice/cursor/cursor.gd"
 }, {
 "base": "",
 "class": "DijkstraMap",
@@ -67,7 +67,7 @@ _global_script_classes=[ {
 "base": "AnimatorDevice",
 "class": "DualScreenAnimator",
 "language": "GDScript",
-"path": "res://src/Skeletons/services/output services/FightMapDisplay/AnimatorDevice/DualScreen/DualScreenAnimator.gd"
+"path": "res://src/Skeletons/services/output services/AnimatorDevice/DualScreen/DualScreenAnimator.gd"
 }, {
 "base": "Reference",
 "class": "EventCenter",
@@ -97,7 +97,7 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "FightAnimationCenter",
 "language": "GDScript",
-"path": "res://src/Skeletons/services/output services/AnimationCenter.gd"
+"path": "res://src/Skeletons/services/output services/animation center/AnimationCenter.gd"
 }, {
 "base": "Resource",
 "class": "FightData",
@@ -119,10 +119,15 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/Skeletons/FightSystem/Objects/FightObject/FightObject.gd"
 }, {
+"base": "Reference",
+"class": "FightUserGui",
+"language": "GDScript",
+"path": "res://src/Skeletons/services/output services/AnimatorDevice/FightUserGui/fightUserGui.gd"
+}, {
 "base": "AnimatorDevice",
 "class": "GuiMapAnimator",
 "language": "GDScript",
-"path": "res://src/Skeletons/services/output services/FightMapDisplay/AnimatorDevice/GUIMapAnimator/GuiMapAnimator.gd"
+"path": "res://src/Skeletons/services/output services/AnimatorDevice/GUIMapAnimator/GuiMapAnimator.gd"
 }, {
 "base": "Node",
 "class": "IDijkstraMap",
@@ -155,9 +160,9 @@ _global_script_classes=[ {
 "path": "res://src/Skeletons/services/decision services/IntentSheet/IntentSheet.gd"
 }, {
 "base": "Reference",
-"class": "ObjectiveMap",
+"class": "MapIntern",
 "language": "GDScript",
-"path": "res://src/Skeletons/services/decision services/MapInternData/objective_map.gd"
+"path": "res://src/Skeletons/services/calculation services/MapIntern/map_intern.gd"
 }, {
 "base": "Reference",
 "class": "Pipe",
@@ -207,6 +212,7 @@ _global_script_class_icons={
 "FightInputHandler": "",
 "FightInputRequester": "",
 "FightObject": "",
+"FightUserGui": "",
 "GuiMapAnimator": "",
 "IDijkstraMap": "",
 "ITeams": "",
@@ -214,7 +220,7 @@ _global_script_class_icons={
 "Intent": "",
 "IntentGenerator": "",
 "IntentSheet": "",
-"ObjectiveMap": "",
+"MapIntern": "",
 "Pipe": "",
 "Pipeline": "",
 "WatcherCondition": "",

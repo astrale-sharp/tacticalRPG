@@ -22,7 +22,7 @@ func filter(list : Array,_func : FuncRef):
 			list.erase(elem)
 
 
-func __get_all_actors():
+func get_all_actors():
 	var all_actors
 	for eachTeam in Teams:
 		for eachActor in eachTeam.actorList:
@@ -41,7 +41,7 @@ func __poll_consecutive_actor_of_a_team(list : Array):
 	return res
 
 func next_actor_list():
-	var all_actors : Array = __get_all_actors()
+	var all_actors : Array = get_all_actors()
 	#filter active
 	filter(
 		all_actors,\
