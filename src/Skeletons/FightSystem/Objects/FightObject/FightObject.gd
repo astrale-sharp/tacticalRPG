@@ -36,7 +36,7 @@ signal PlayEnded
 #------------------------------------#
 
 #------------------------------------#
-var FightData #will contain all the data given for doing the fight
+var _FightData : FightData  #will contain all the data given for doing the fight
 	#a map,teams, condition for end fight
 
 #------------------------------------#
@@ -45,11 +45,11 @@ var FightData #will contain all the data given for doing the fight
 var FightGui #general display of info and permaOption or choice that dont require the map FightObject Wires as it likes the input requested to gui devices here or in the fightmap
 
 # connected outputs
-var MapGui # handles repres of blocks, player obstacle
-var DualScreenGui 
-var ConsoleGui
+var MapGui : GuiMapAnimator # handles repres of blocks, player obstacle
+var DualScreenGui : DualScreenAnimator
+var ConsoleGui : Console
 
-var Cursor #optionnal
+var _Cursor : Cursor #optionnal
 
 #---------------CALCULATION------------------#
 var MapIntern # handles calculationn can i go there, what cost?
@@ -139,7 +139,7 @@ func initiate():
 	#------------SELF------------#
 	dependancy_check()
 	
-	KeepFight = FightData.EndCondition
+	KeepFight = _FightData.EndCondition
 	
 	InputHandler = FightInputHandler.new()
 	MyAnimationCenter = FightAnimationCenter.new(ConsoleGui,MapGui,DualScreenGui)
@@ -160,8 +160,8 @@ func dependancy_check():
 	if not MyITeams:
 		printerr("no Teams, cant initiate")
 		queue_free()
-	if not FightData:
-		printerr("no FightData, cant initiate")
+	if not _FightData:
+		printerr("no _FightData, cant initiate")
 		queue_free()
 	if not MapGui:
 		printerr("no MapGui, cant initiate")

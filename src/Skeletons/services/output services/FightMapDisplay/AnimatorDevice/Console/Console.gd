@@ -1,4 +1,4 @@
-extends RichTextLabel
+extends AnimatorDevice
 class_name Console
 """
 is thrown list of text to be read
@@ -7,6 +7,9 @@ reads them 'line by line' where a line is an elem of the array
 
 ne supporte pas pour l'instant de recevoir plusieurs message à la fois
 """
+
+var output : RichTextLabel
+
 signal LineRead
 signal MessageRead
 signal InputContinueReceived
@@ -28,14 +31,14 @@ func _OnInputReceived():
 
 
 func read_one(my_text):
-	percent_visible = 0.0
-	text = my_text
+	output.percent_visible = 0.0
+	output.text = my_text
 	tween.start()
 	tween.interpolate_property(self,
 					"percent_visible",
 					0.0,
 					1.0,
-					len(text)/lecture_speed,
+					len(output.text)/lecture_speed,
 					Tween.TRANS_LINEAR,
 					Tween.EASE_IN)
 	yield(tween,"tween_completed")
