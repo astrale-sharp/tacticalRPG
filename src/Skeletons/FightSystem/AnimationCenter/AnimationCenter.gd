@@ -38,11 +38,14 @@ var IAction # interface between action and animation center, get animation steps
 var __type_to_AnimatorDevice = {}
 var __queue = []
 
-func _init(_consoleAnimator : AnimatorDevice,_MapGuiAnimator : AnimatorDevice,_DuelScreenAnimator : AnimatorDevice):
+func _init(_consoleAnimator : AnimatorDevice,\
+	_MapGuiAnimator : AnimatorDevice,\
+	_DuelScreenAnimator : AnimatorDevice\
+	)-> void:
 	__type_to_AnimatorDevice[Constants.Gui.FightAnimation.CONSOLE] = _consoleAnimator
 	__type_to_AnimatorDevice[Constants.Gui.FightAnimation.MAP_GUI] = _MapGuiAnimator
 	__type_to_AnimatorDevice[Constants.Gui.FightAnimation.DUEL_SCREEN] = _DuelScreenAnimator
-
+	
 func ReceiveAction(AnimActions):
 	#put action on a queue
 	__queue.push_back(AnimActions)

@@ -54,7 +54,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/Skeletons/FightSystem/AnimationCenter/FightMapDisplay/AnimatorDevice/Console/ConsoleAnimator.gd"
 }, {
-"base": "",
+"base": "Node",
 "class": "DijkstraMap",
 "language": "NativeScript",
 "path": "res://dijkstra_map.gdns"
