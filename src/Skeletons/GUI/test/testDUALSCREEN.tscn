@@ -1,8 +1,14 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://src/Skeletons/FightSystem/FightActor/FightActor.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/Skeletons/FightSystem/Objects/FightObject/dependancy/Team/dependancy/PlayerSet/dependancy/FightActor/FightActor.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Skeletons/GUI/test/testDUALSCREEN.gd" type="Script" id=2]
-[ext_resource path="res://src/Skeletons/FightSystem/AnimationCenter/FightMapDisplay/AnimatorDevice/DualScreen/dualScreen.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/Skeletons/FightSystem/output services/FightMapDisplay/AnimatorDevice/DualScreen/dualScreen.tscn" type="PackedScene" id=3]
+
+
+
+
+
+
 
 [sub_resource type="Animation" id=1]
 resource_name = "SETUP"

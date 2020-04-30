@@ -12,47 +12,47 @@ _global_script_classes=[ {
 "base": "Reference",
 "class": "ActionWatcher",
 "language": "GDScript",
-"path": "res://src/Skeletons/FightSystem/EventCenter/ActionWatcher.gd"
+"path": "res://src/Skeletons/FightSystem/connection services/EventCenter/ActionWatcher.gd"
 }, {
 "base": "Reference",
 "class": "ActorChoiceGenerator",
 "language": "GDScript",
-"path": "res://src/Skeletons/FightSystem/FightActor/possible_choice_generator.gd"
+"path": "res://src/Skeletons/FightSystem/Objects/FightObject/dependancy/Team/dependancy/PlayerSet/dependancy/FightActor/dependancy/possible_choice_generator.gd"
 }, {
 "base": "Node",
 "class": "AnimatorDevice",
 "language": "GDScript",
-"path": "res://src/Skeletons/FightSystem/AnimationCenter/FightMapDisplay/AnimatorDevice/AnimatorDevice.gd"
+"path": "res://src/Skeletons/FightSystem/output services/FightMapDisplay/AnimatorDevice/AnimatorDevice.gd"
 }, {
 "base": "Node",
 "class": "Assault",
 "language": "GDScript",
-"path": "res://src/Skeletons/FightSystem/Assault/Assault.gd"
+"path": "res://src/Skeletons/FightSystem/Objects/resources/Assault/Assault.gd"
 }, {
 "base": "Reference",
 "class": "AssaultDealer",
 "language": "GDScript",
-"path": "res://src/Skeletons/FightSystem/Assault/AssaultDealer.gd"
+"path": "res://src/Skeletons/FightSystem/Objects/resources/Assault/AssaultDealer.gd"
 }, {
 "base": "Reference",
 "class": "Astar2Dutils",
 "language": "GDScript",
-"path": "res://src/Skeletons/FightSystem/MapInternData/a_star_utils.gd"
+"path": "res://src/Skeletons/FightSystem/decision services/MapInternData/a_star_utils.gd"
 }, {
 "base": "Reference",
 "class": "Condition",
 "language": "GDScript",
-"path": "res://src/Skeletons/FightSystem/FightObject/Condition/condition.gd"
+"path": "res://src/Skeletons/FightSystem/Objects/resources/Condition/condition.gd"
 }, {
 "base": "RichTextLabel",
 "class": "Console",
 "language": "GDScript",
-"path": "res://src/Skeletons/FightSystem/AnimationCenter/FightMapDisplay/AnimatorDevice/Console/Console.gd"
+"path": "res://src/Skeletons/FightSystem/output services/FightMapDisplay/AnimatorDevice/Console/Console.gd"
 }, {
 "base": "AnimatorDevice",
 "class": "ConsoleAnimator",
 "language": "GDScript",
-"path": "res://src/Skeletons/FightSystem/AnimationCenter/FightMapDisplay/AnimatorDevice/Console/ConsoleAnimator.gd"
+"path": "res://src/Skeletons/FightSystem/output services/FightMapDisplay/AnimatorDevice/Console/ConsoleAnimator.gd"
 }, {
 "base": "Node",
 "class": "DijkstraMap",
@@ -62,62 +62,57 @@ _global_script_classes=[ {
 "base": "AnimatorDevice",
 "class": "DualScreenAnimator",
 "language": "GDScript",
-"path": "res://src/Skeletons/FightSystem/AnimationCenter/FightMapDisplay/AnimatorDevice/DualScreen/DualScreenAnimator.gd"
+"path": "res://src/Skeletons/FightSystem/output services/FightMapDisplay/AnimatorDevice/DualScreen/DualScreenAnimator.gd"
 }, {
 "base": "Reference",
 "class": "EventCenter",
 "language": "GDScript",
-"path": "res://src/Skeletons/FightSystem/EventCenter/event_center.gd"
+"path": "res://src/Skeletons/FightSystem/connection services/EventCenter/event_center.gd"
 }, {
 "base": "Reference",
 "class": "Example_Assault",
 "language": "GDScript",
-"path": "res://src/Skeletons/FightSystem/Assault/Assaults/ExampleAssault.gd"
+"path": "res://src/Skeletons/FightSystem/Objects/resources/Assault/Assaults/ExampleAssault.gd"
 }, {
 "base": "Resource",
 "class": "FightAction",
 "language": "GDScript",
-"path": "res://src/Skeletons/FightSystem/Actions/Actions.gd"
+"path": "res://src/Skeletons/FightSystem/Objects/resources/Actions/Actions.gd"
 }, {
 "base": "Node",
 "class": "FightActor",
 "language": "GDScript",
-"path": "res://src/Skeletons/FightSystem/FightActor/FightActor.gd"
+"path": "res://src/Skeletons/FightSystem/Objects/FightObject/dependancy/Team/dependancy/PlayerSet/dependancy/FightActor/FightActor.gd"
 }, {
 "base": "Resource",
 "class": "FightActorHistory",
 "language": "GDScript",
-"path": "res://src/Skeletons/FightSystem/FightActor/History/history.gd"
+"path": "res://src/Skeletons/FightSystem/Objects/FightObject/dependancy/Team/dependancy/PlayerSet/dependancy/FightActor/dependancy/History/history.gd"
 }, {
 "base": "Node",
 "class": "FightAnimationCenter",
 "language": "GDScript",
-"path": "res://src/Skeletons/FightSystem/AnimationCenter/AnimationCenter.gd"
+"path": "res://src/Skeletons/FightSystem/output services/AnimationCenter.gd"
 }, {
 "base": "Reference",
 "class": "FightInputHandler",
 "language": "GDScript",
-"path": "res://src/Skeletons/FightSystem/InputHandler/fight_input_handler.gd"
+"path": "res://src/Skeletons/FightSystem/connection services/InputHandler/fight_input_handler.gd"
 }, {
 "base": "Reference",
 "class": "FightInputRequester",
 "language": "GDScript",
-"path": "res://src/Skeletons/FightSystem/InputHandler/FightInputRequester.gd"
+"path": "res://src/Skeletons/FightSystem/connection services/InputHandler/FightInputRequester.gd"
 }, {
 "base": "Node2D",
 "class": "FightObject",
 "language": "GDScript",
-"path": "res://src/Skeletons/FightSystem/FightObject/FightObject.gd"
+"path": "res://src/Skeletons/FightSystem/Objects/FightObject/FightObject.gd"
 }, {
 "base": "AnimatorDevice",
 "class": "GuiMapAnimator",
 "language": "GDScript",
-"path": "res://src/Skeletons/FightSystem/AnimationCenter/FightMapDisplay/AnimatorDevice/GUIMapAnimator/GuiMapAnimator.gd"
-}, {
-"base": "Reference",
-"class": "GuiNextActorsListUtils",
-"language": "GDScript",
-"path": "res://src/Skeletons/FightSystem/FightActor/gui_next_actors_utils.gd"
+"path": "res://src/Skeletons/FightSystem/output services/FightMapDisplay/AnimatorDevice/GUIMapAnimator/GuiMapAnimator.gd"
 }, {
 "base": "Node",
 "class": "IDijkstraMap",
@@ -127,57 +122,57 @@ _global_script_classes=[ {
 "base": "Reference",
 "class": "ITeams",
 "language": "GDScript",
-"path": "res://src/Skeletons/FightSystem/FightActor/Team/Iteam.gd"
+"path": "res://src/Skeletons/FightSystem/Objects/FightObject/dependancy/Team/Iteam.gd"
 }, {
 "base": "Control",
 "class": "InputDevice",
 "language": "GDScript",
-"path": "res://src/Skeletons/FightSystem/InputHandler/input_device.gd"
+"path": "res://src/Skeletons/FightSystem/connection services/InputHandler/input_device.gd"
 }, {
 "base": "Reference",
 "class": "Intent",
 "language": "GDScript",
-"path": "res://src/Skeletons/FightSystem/IntentSheet/Intent/Intent.gd"
+"path": "res://src/Skeletons/FightSystem/decision services/IntentSheet/Intent/Intent.gd"
 }, {
 "base": "Reference",
 "class": "IntentGenerator",
 "language": "GDScript",
-"path": "res://src/Skeletons/FightSystem/IntentSheet/Intent/intentGenerator.gd"
+"path": "res://src/Skeletons/FightSystem/decision services/IntentSheet/Intent/intentGenerator.gd"
 }, {
 "base": "Reference",
 "class": "IntentSheet",
 "language": "GDScript",
-"path": "res://src/Skeletons/FightSystem/IntentSheet/IntentSheet.gd"
+"path": "res://src/Skeletons/FightSystem/decision services/IntentSheet/IntentSheet.gd"
 }, {
 "base": "Reference",
 "class": "ObjectiveMap",
 "language": "GDScript",
-"path": "res://src/Skeletons/FightSystem/MapInternData/objective_map.gd"
+"path": "res://src/Skeletons/FightSystem/decision services/MapInternData/objective_map.gd"
 }, {
 "base": "Reference",
 "class": "Pipe",
 "language": "GDScript",
-"path": "res://src/Skeletons/FightSystem/IntentSheet/Pipeline/pipe.gd"
+"path": "res://src/Skeletons/FightSystem/decision services/IntentSheet/Pipeline/pipe.gd"
 }, {
 "base": "Reference",
 "class": "Pipeline",
 "language": "GDScript",
-"path": "res://src/Skeletons/FightSystem/IntentSheet/Pipeline/pipeline.gd"
+"path": "res://src/Skeletons/FightSystem/decision services/IntentSheet/Pipeline/pipeline.gd"
 }, {
 "base": "Reference",
 "class": "WatcherCondition",
 "language": "GDScript",
-"path": "res://src/Skeletons/FightSystem/EventCenter/condition.gd"
+"path": "res://src/Skeletons/FightSystem/connection services/EventCenter/condition.gd"
 }, {
 "base": "Reference",
 "class": "WatcherListener",
 "language": "GDScript",
-"path": "res://src/Skeletons/FightSystem/EventCenter/event_listener.gd"
+"path": "res://src/Skeletons/FightSystem/connection services/EventCenter/event_listener.gd"
 }, {
 "base": "Reference",
 "class": "WatcherSubscriber",
 "language": "GDScript",
-"path": "res://src/Skeletons/FightSystem/EventCenter/subscriber.gd"
+"path": "res://src/Skeletons/FightSystem/connection services/EventCenter/subscriber.gd"
 } ]
 _global_script_class_icons={
 "ActionWatcher": "",
@@ -201,7 +196,6 @@ _global_script_class_icons={
 "FightInputRequester": "",
 "FightObject": "",
 "GuiMapAnimator": "",
-"GuiNextActorsListUtils": "",
 "IDijkstraMap": "",
 "ITeams": "",
 "InputDevice": "",
