@@ -85,10 +85,9 @@ func play_set_of_actors():
 	but i'd like to be possible for an actor to be able to play later in the turn, by resorting the list for instance
 	"""
 	var curr_player : FightActor
-	var old_player : FightActor
 	emit_signal("SetStarted")
 	
-	var next_actor_set #: SetOfPlayer = MyITeams.next_set_of_player() #get a list of actors of the same team sorted by init
+	var next_actor_set : SetOfPlayer = MyITeams.next_set_of_player() #get a list of actors of the same team sorted by init
 		#sortedsort func isnt enough to be fair! if get_reamaining always return same list, you should beware that at equal init, equally likely to start!
 
 
