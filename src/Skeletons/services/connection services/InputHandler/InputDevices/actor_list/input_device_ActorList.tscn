@@ -1,6 +1,7 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://src/Skeletons/services/connection services/InputHandler/InputDevices/list/actor_list/input_device_ActorList.gd" type="Script" id=1]
+[ext_resource path="res://src/Skeletons/services/connection services/InputHandler/InputDevices/actor_list/input_device_ActorList.gd" type="Script" id=1]
+
 
 
 
