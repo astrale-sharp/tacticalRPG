@@ -27,10 +27,9 @@ var intentSheet
 #INTERN
 var History : FightActorHistory= FightActorHistory.new()
 
-#------------------SelfModule----------------#
-var intent_generator #with a const from Constants.FightSystemConstants.Inputs.Choices and the data from an adequate request
-		#generate an intent
-var possible_choice_generator : ActorChoiceGenerator # generates choice dpending of context
+#------------------Modules----------------#
+var possible_choice_generator : ActorChoiceGenerator # generates list of possible options depending on context
+var intent_generator : IntentGenerator #generates a precise intents base on an Option and a Decision (generally by gui)
 
 
 
@@ -52,21 +51,17 @@ func is_dead():
 	print("fix player is dead")
 	return false
 
-func is_active():
-	print("fix player is active")
+func is_active(context : FightContext):
+	# cant get options
 	if __decided_not_active: return false
-	return true
+	var options = possible_choice_generator.generate_only_actions(context)
+	return options != []
 	#do other test to check if should be active
-
-func turn_done():
-	return is_active()
 
 const myconst = Constants.FightSystemConstants.Inputs
 
-func play_turn():
+func play_turn(context):
 	emit_signal("PlayerTurnStart")
-	#attirer le MapGui sur moi!!!!
-	var context = [0,0] #elem1 = move context, elem2 = attack context
 	var choice_list = possible_choice_generator.generate(context) #needs context,dont generate empty choices
 	var choice = myconst.Choices.CANCEL
 

@@ -26,6 +26,9 @@ pipeline?
 signal FightStarted
 signal FightEnded
 
+signal TurnStarted
+signal TurnEnded
+
 signal SetStarted
 signal SetEnded
 
@@ -38,7 +41,8 @@ signal PlayEnded
 #-------------RESOURCE-----------------#
 var _FightData : FightData  #will contain all the data given for doing the fight
 	#a map,teams, condition for end fight
-
+var _FightContext: FightContext #contains all the now data of the fight
+	#needed by actors
 #---------------OUTPUT DEVICES---------------#
 
 #user info query
@@ -73,9 +77,11 @@ var KeepFight : Condition
 func fight():
 	emit_signal("FightStarted")
 	#this is wrong, you should check at the end of each actor turn or after each action
-	while KeepFight.carry_on():
-		yield(play_set_of_actors(),"completed")
-	
+	while KeepFight.evaluate():
+		emit_signal("TurnStarted")
+		while MyITeams.someone_can_play():
+			yield(play_set_of_actors(),"completed")
+		emit_signal("TurnEnded")
 	emit_signal("FightEnded")
 
 
@@ -87,14 +93,14 @@ func play_set_of_actors():
 	var curr_player : FightActor
 	emit_signal("SetStarted")
 	
-	var next_actor_set : SetOfPlayer = MyITeams.next_set_of_player() #get a list of actors of the same team sorted by init
+	var next_actor_set : SetOfActors = MyITeams.next_set_of_player() #get a list of actors of the same team sorted by init
 		#sortedsort func isnt enough to be fair! if get_reamaining always return same list, you should beware that at equal init, equally likely to start!
 
 
 	
 	#itering the actor
 #	for list_of_fight_actors_by_team in list_of_list_of_fightActors_by_team:
-	if not next_actor_set.isAI():#is joueur
+	if not next_actor_set.isAI:#is joueur
 		#give choice and play choice until the mini list is empty
 		while not next_actor_set.empty():
 			#gui choice in next actor list
@@ -102,24 +108,24 @@ func play_set_of_actors():
 			curr_player = state.resume()
 
 			
-			while not curr_player.is_done():
+			while not curr_player.is_active(_FightContext):
 				emit_signal("PlayStarted")
-				yield(curr_player.play(),"completed")
+				yield(curr_player.play_turn(_FightContext) ,"completed")
 				emit_signal("PlayEnded")
 				
-			if not KeepFight.carry_on(): break
+			if not KeepFight.evaluate(): break
 		emit_signal("SetEnded")
 	else:
 		while not next_actor_set.empty():
 			var actor = next_actor_set.IA_choice()
-			yield(actor.play_turn(),"completed")
-			if not KeepFight.carry_on(): break
+			yield(actor.play_turn(),"completed") #note set of actors can share a number of DijkstraMaps
+			if not KeepFight.evaluate(): break
 	emit_signal("TurnEnded")
 
 
 func OnActorTurnEnded(Actor):
 	print("Actor turn ended : {}.".format(Actor.name))
-	if not KeepFight.carry_on():
+	if not KeepFight.evaluate():
 		end_fight()
 
 func end_fight():

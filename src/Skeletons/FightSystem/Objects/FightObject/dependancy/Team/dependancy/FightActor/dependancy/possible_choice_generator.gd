@@ -16,16 +16,30 @@ var possible_choice = [
 	Constants.FightSystemConstants.Inputs.Choices.SPELL,
 						]
 
+#TODO
+func can_move(context)->bool:
+	#checks if there is at least one case on which you can move
+	return false
 
-func can_move(context):
-	return true
 func can_attack(context):
-	return true
+	#checks if there's at least one target you can hit
+	return false
 
-func generate(context):
-	var send = possible_choice.duplicate(true)
-	var move_context = context[0]
-	var attack_context = context[1]
-	if can_move(move_context): send.append(Constants.FightSystemConstants.Inputs.Choices.MOVE)
-	if can_attack(attack_context): send.append(Constants.FightSystemConstants.Inputs.Choices.ATTACK)
+func can_spell(context):
+	#checks one spell you can cast
+	return false
+
+
+func generate_without():
+	return possible_choice.duplicate(true)
+
+func generate(context : FightContext):
+	var send = generate_without()
+	var move_context = context.move #FIXME
+	var attack_context = context.attacl #FIXME
+	if can_move(move_context):
+		send.append(Constants.FightSystemConstants.Inputs.Choices.MOVE)
+	
+	if can_attack(attack_context):
+		send.append(Constants.FightSystemConstants.Inputs.Choices.ATTACK)
 	return send
