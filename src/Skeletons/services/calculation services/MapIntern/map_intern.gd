@@ -20,10 +20,10 @@ it has a layers
 
 """
 const EMPTY = -1
-var map := DijkstraMap.new()
+var map := IDijkstraMap.new()
 
 #pos -> Actor, Obstacle, Ground
-var BodiesLayer
+var Team_id_to_BodiesLayer
 var ObstacleLayer
 var GroundLayer
 
@@ -58,14 +58,16 @@ func reachable_positions_from(pos,unavailable)-> Array:
 	return reachables
 
 func case_is_busy(pos):
-	if BodiesLayer[pos] != EMPTY or ObstacleLayer[pos] != EMPTY: return true
+	var body_on_case
+	if body_on_case or ObstacleLayer[pos] != EMPTY: return true
 	return false
 
 # does not support moving two thing on the same place
 #these object may be multiple case large, you should call this on each case
 
-func move_body_case_from_to(from,to):
+func move_body_case_from_to(team_id,from,to):
 	if case_is_busy(to): return FAILED
+	var BodiesLayer = Team_id_to_BodiesLayer[team_id]
 	
 	BodiesLayer[to] = BodiesLayer[from]
 	BodiesLayer[from] = EMPTY
@@ -78,10 +80,24 @@ func move_obstacle_case_from_to(from,to):
 	
 	return OK
 	
-func free_obstacle_case(pos):
+func free_obstacle_case(team_id,pos):
+	var BodiesLayer = Team_id_to_BodiesLayer[team_id]
 	ObstacleLayer[pos] = EMPTY
 	
-func free_body_case(pos):
+func free_body_case(team_id,pos):
+	var BodiesLayer = Team_id_to_BodiesLayer[team_id]	
 	BodiesLayer[pos] = EMPTY
 
-
+func get_possibles(team_id,map_pos,terrains = {},max_cost = INF):
+	"returns all reachable positions from map_pos for the member of team_id, map_pos excluded"
+	var possibles := []
+	
+	map.recalculate(
+		map.position_to_id(map_pos),
+		{
+		'input is destination' : false,
+		'maximum cost' : max_cost,
+		'initial costs' : 0.0,
+		'terrain weights' : terrains,
+		}
+	)

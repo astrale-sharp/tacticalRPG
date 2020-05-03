@@ -45,6 +45,8 @@ func OnPlayerTurnStarted():
 	"""
 	"""
 	__decided_not_active = false
+	#flush history
+	#resets points
 	pass
 
 func is_dead():

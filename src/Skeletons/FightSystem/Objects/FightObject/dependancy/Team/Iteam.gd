@@ -7,6 +7,9 @@ var Teams : Array
 
 func _init(Team_list):
 	Teams = Team_list
+	for team in Teams:
+		var t : Team = team
+		team.unique_id = next_unique_id()
 
 #---------------------#
 #---------------------#
@@ -30,6 +33,14 @@ func next_set_of_player()->SetOfActors:
 
 #---------------------#
 #--------UTILS--------#
+var used_id := []
+func next_unique_id():
+	var i = 0
+	while i in used_id:
+		i+= 1
+	used_id.append(i)
+	return i 
+	
 func sort_by_init(actor1,actor2):
 	if actor1.initiative > actor2.initiative: return true
 	else: return false

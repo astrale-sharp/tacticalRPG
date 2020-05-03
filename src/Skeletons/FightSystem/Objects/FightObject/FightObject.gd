@@ -117,8 +117,8 @@ func play_set_of_actors():
 		emit_signal("SetEnded")
 	else:
 		while not next_actor_set.empty():
-			var actor = next_actor_set.IA_choice()
-			yield(actor.play_turn(),"completed") #note set of actors can share a number of DijkstraMaps
+			var actor : FightActor = next_actor_set.IA_choice()
+			yield(actor.play_turn(_FightContext),"completed") #note set of actors can share a number of DijkstraMaps
 			if not KeepFight.evaluate(): break
 	emit_signal("TurnEnded")
 
