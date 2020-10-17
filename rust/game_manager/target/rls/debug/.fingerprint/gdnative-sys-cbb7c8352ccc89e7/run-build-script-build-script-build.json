@@ -1,1 +1,0 @@
-{"rustc":66165631676752942,"features":"","target":0,"profile":0,"path":0,"deps":[[3051545706115845213,"build_script_build",false,5624515844439827899]],"local":[{"RerunIfChanged":{"output":"debug/build/gdnative-sys-cbb7c8352ccc89e7/output","paths":["godot_headers/gdnative_api.json"]}}],"rustflags":[],"metadata":0,"config":0}

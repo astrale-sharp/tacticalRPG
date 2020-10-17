@@ -1,1 +1,0 @@
-cargo:rerun-if-changed=/home/astrale/.cargo/registry/src/github.com-1ecc6299db9ec823/gdnative-sys-0.9.0/godot_headers/gdnative_api.json
