@@ -5,12 +5,16 @@
 ///     external context
 
 /// contains exhaustive info about a movement
+#[derive(Clone)]
 pub struct MoveInfo {}
 /// contains exhaustive info about an attack  
+#[derive(Clone)]
 pub struct AttackInfo {}
 /// contains exhaustive info about an object use
+#[derive(Clone)]
 pub struct ObjectInfo {}
 /// contains exhaustive info about a spell use
+#[derive(Clone)]
 pub struct SpellInfo {}
 
 impl MoveInfo {
@@ -28,6 +32,8 @@ pub enum PlayOptions {
 }
 
 /// representation of what an entity will achieve
+
+#[derive(Clone)]
 pub enum Action {
     Move(MoveInfo),
     Attack(AttackInfo),
@@ -43,7 +49,7 @@ impl Action {
                 todo!()
             }
             // Action if feature combo implemented
-            x => *x,
+            x => x.clone(),
         }
     }
 }
@@ -80,7 +86,7 @@ impl Intent {
 ///
 /// between theses steps, entities (and maybe elements of nature) watch your intents and submit their own intent as a reaction
 pub struct IntentSubmitter {
-    queue: todo!(),
+    queue: Vec<Intent>,
 }
 #[allow(unreachable_code)]
 impl IntentSubmitter {

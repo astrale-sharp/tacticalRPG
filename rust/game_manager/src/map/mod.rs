@@ -1,6 +1,10 @@
 
 use crate::{Entity, Object, Obstacle};
+use fnv::FnvHashMap;
+pub mod djikstra;
+use djikstra::DijkstraMap;
 
+pub struct Pos2D(f64,f64);
 /// spatial representation of the world
 ///
 /// holds the information of :
@@ -9,12 +13,14 @@ use crate::{Entity, Object, Obstacle};
 ///     who is where
 pub struct Map {
     ///  position -> TerrainType
-    terrain_map: todo!(),
+    terrain_map: DijkstraMap,
     /// position -> who or what is there
-    interactable_map: todo!(),
+    /// used to complement djikstramap result for coherent result with entities present on the map
+    interactable_map: FnvHashMap<Pos2D,TerrainType>,
     //djikstra_map? en interne?
 }
 /// what each case of the world is made of
+#[derive(Eq,Hash,PartialEq)]
 pub enum TerrainType {
     Forest,
     Ground,
@@ -22,6 +28,7 @@ pub enum TerrainType {
     Void,
     Water,
     Sky,
+    ByDefault,
 }
 /// everything interactable that can be in the world
 pub enum Occupant {
