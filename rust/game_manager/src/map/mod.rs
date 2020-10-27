@@ -20,7 +20,7 @@ pub struct Map {
     //djikstra_map? en interne?
 }
 /// what each case of the world is made of
-#[derive(Eq,Hash,PartialEq)]
+#[derive(Eq,Hash,PartialEq,Debug)]
 pub enum TerrainType {
     Forest,
     Ground,

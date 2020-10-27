@@ -3,79 +3,19 @@ use fnv::FnvHashMap;
 use fnv::FnvHashSet;
 use std::ops::{Add, Mul};
 
+pub mod get_maps;
 pub mod getters;
 pub mod setters;
+pub mod ops;
+pub mod grids;
 
-#[derive(PartialOrd, Copy, Clone, PartialEq)]
+#[derive(PartialOrd, Copy, Clone, PartialEq,Debug)]
 pub struct Weight(f32);
 
-pub mod ops {
-    use super::*;
-    impl Mul<Weight> for Weight {
-        type Output = Weight;
-        fn mul(self, rhs: Self) -> Self::Output {
-            let (Weight(x), Weight(y)) = (self, rhs);
-            Weight(x * y)
-        }
-    }
-
-    impl Mul<Cost> for Weight {
-        type Output = Cost;
-        fn mul(self, rhs: Self::Output) -> Self::Output {
-            let (Cost(x), Weight(y)) = (rhs, self);
-            Cost(x * y)
-        }
-    }
-
-    impl Mul<Cost> for Cost {
-        type Output = Cost;
-        fn mul(self, rhs: Self::Output) -> Self::Output {
-            let (Cost(x), Cost(y)) = (rhs, self);
-            Cost(x * y)
-        }
-    }
-
-    impl Mul<Weight> for Cost {
-        type Output = Cost;
-        fn mul(self, rhs: Weight) -> Self::Output {
-            let (Cost(x), Weight(y)) = (self, rhs);
-            Cost(x * y)
-        }
-    }
-
-    impl Add<Cost> for Weight {
-        type Output = Cost;
-        fn add(self, rhs: Self::Output) -> Self::Output {
-            let (Cost(x), Weight(y)) = (rhs, self);
-            Cost(x + y)
-        }
-    }
-    impl Add<Weight> for Weight {
-        type Output = Weight;
-        fn add(self, rhs: Self::Output) -> Self::Output {
-            let (Weight(x), Weight(y)) = (rhs, self);
-            Weight(x + y)
-        }
-    }
-    impl Add<Cost> for Cost {
-        type Output = Cost;
-        fn add(self, rhs: Self::Output) -> Self::Output {
-            let (Cost(x), Cost(y)) = (rhs, self);
-            Cost(x + y)
-        }
-    }
-    impl Add<Weight> for Cost {
-        type Output = Cost;
-        fn add(self, rhs: Weight) -> Self::Output {
-            let (Cost(x), Weight(y)) = (self,rhs);
-            Cost(x + y)
-        }
-    }
-}
-#[derive(PartialEq, PartialOrd,Ord, Copy, Clone, Eq, Hash)]
+#[derive(PartialEq, PartialOrd,Ord, Copy, Clone, Eq, Hash,Debug)]
 pub struct PointID(i32);
 
-#[derive(PartialOrd, Copy, Clone, PartialEq)]
+#[derive(PartialOrd, Copy, Clone, PartialEq,Debug)]
 pub struct Cost(f32);
 
 impl Default for Cost {
@@ -84,11 +24,17 @@ impl Default for Cost {
     }
 }
 
-enum GridType {
+pub enum GridType {
     SQUARE,
     HEX,
 }
 
+pub enum Way {
+    Straightforward,
+    Reverse,
+}
+
+#[derive(Debug)]
 pub struct DjikstraMap {
     connections: FnvHashMap<PointID, FnvHashMap<PointID, Weight>>, //for point1 stores weights of connections going from point1 to point2
     reverse_connections: FnvHashMap<PointID, FnvHashMap<PointID, Weight>>, //for point1 stores weights of connections going from point2 to point1
@@ -98,7 +44,6 @@ pub struct DjikstraMap {
     disabled_points: FnvHashSet<PointID>,
     terrain_map: FnvHashMap<PointID, TerrainType>,
 }
-
 impl DjikstraMap {
     ///Recalculates cost map and direction map information fo each point, overriding previous results.  
     ///First argument is ID of the origin point or array of IDs (preferably `PoolIntArray`).
@@ -116,65 +61,46 @@ impl DjikstraMap {
     /// Unspecified values are assumed to be `1.0` by default.
     pub fn recalculate(
         &mut self,
-        origins: Vec<PointID>,
-        reverse: Option<bool>,
+        origins: &[PointID],
+        way: Option<Way>,
         max_cost: Option<Cost>,
         initial_costs: Option<Vec<Cost>>,
         terrain_weights: Option<FnvHashMap<TerrainType, Weight>>,
         termination_points: Option<FnvHashSet<PointID>>,
     ) {
-        let reverse: bool = reverse.unwrap_or(false);
+        let way = way.unwrap_or(Way::Straightforward);
         let max_cost = max_cost.unwrap_or(Cost(std::f32::INFINITY));
-        let initial_costs: Vec<Cost> = initial_costs.unwrap_or(Vec::<Cost>::new());
-        let mut terrain_weights =
-            terrain_weights.unwrap_or(FnvHashMap::<TerrainType, Weight>::default());
-        let mut termination_points = termination_points.unwrap_or(FnvHashSet::<PointID>::default());
-        self.recalculate_map_intern2(
+        let initial_costs: Vec<Cost> = initial_costs.unwrap_or_default();
+        let terrain_weights =
+            terrain_weights.unwrap_or_default();
+        let termination_points = termination_points.unwrap_or_default();
+        self.recalculate_map_intern(
             &origins,
             Some(&initial_costs),
             max_cost,
-            reverse,
+            way,
             &terrain_weights,
             Some(&termination_points),
         );
     }
     //functions for acccessing results
 
-    ///returns `PoolIntArray` of point IDs corresponding to a shortest path from given point (note: given point isn't included).
-    ///If point is a target or is inaccessible, returns empty array.
-    pub fn get_shortest_path_from_point(&mut self, point: PointID) -> Vec<PointID> {
-        let mut current_point = point;
-        let mut path: Vec<PointID> = Vec::new();
-        let mut next_point: Option<PointID> = self.get_direction_at_point(point);
-        while Some(current_point) != next_point && next_point.is_some() {
-            current_point = next_point.unwrap();
-            path.push(current_point);
-            next_point = self.get_direction_at_point(current_point);
-        }
-        path
-    }
 
-    fn cost_of(&self, point: PointID) -> Cost {
-        *self
-            .cost_map
-            .get(&point)
-            .unwrap_or(&Cost(std::f32::INFINITY))
-    }
+
     //actually recalculates the DijkstraMap
-    fn recalculate_map_intern2(
+    fn recalculate_map_intern(
         &mut self,
-        open_set: &Vec<PointID>,
+        open_set: &[PointID],
         initial_costs: Option<&Vec<Cost>>,
         max_cost: Cost,
-        reversed: bool,
+        way : Way,
         terrain_costs: &FnvHashMap<TerrainType, Weight>,
         termination_points: Option<&FnvHashSet<PointID>>,
     ) {
         //switches direction of connections
-        let connections = if reversed {
-            &self.reverse_connections
-        } else {
-            &self.connections
+        let connections = match way {
+            Way::Reverse => &self.reverse_connections,
+            Way::Straightforward => &self.connections
         };
         #[derive(Copy, Clone, PartialEq)]
         struct QueuePriority {
@@ -222,7 +148,7 @@ impl DjikstraMap {
                     *src,
                     QueuePriority {
                         id: *src,
-                        cost: self.cost_of(*src),
+                        cost: self.get_cost_at_point(*src),
                     },
                 );
             }
@@ -236,7 +162,7 @@ impl DjikstraMap {
             if termination_points.is_some() && termination_points.unwrap().contains(&point1) {
                 break;
             }
-            let point1_cost = self.cost_of(point1);
+            let point1_cost = self.get_cost_at_point(point1);
             let weight_of_point1 = terrain_costs
                 .get(
                     &self
@@ -261,7 +187,7 @@ impl DjikstraMap {
                                 .unwrap_or(&Weight(1.0)));
                 //add to the open set (or update values if already present)
                 //if point is enabled and new cost is better than old one, but not bigger than maximum cost
-                if cost < self.cost_of(point2)
+                if cost < self.get_cost_at_point(point2)
                     && cost <= max_cost
                     && !self.disabled_points.contains(&point2)
                 {

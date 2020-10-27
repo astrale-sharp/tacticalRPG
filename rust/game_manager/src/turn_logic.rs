@@ -44,7 +44,7 @@ impl Action {
     fn minimal_action(&self) -> Self {
         use Action::*;
         match self {
-            Move(MoveInfo) => {
+            Move(move_info) => {
                 // one step on map
                 todo!()
             }
